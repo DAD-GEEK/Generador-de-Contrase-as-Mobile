@@ -74,6 +74,7 @@ class _FormFieldsWidgetState extends State<FormFieldsWidget> {
                 ),
                 onChanged: (value) {
                   passwordValues["size"] = int.parse(value);
+                  passwordValidator();
                   setState(() {});
                 },
               ),
@@ -85,6 +86,7 @@ class _FormFieldsWidgetState extends State<FormFieldsWidget> {
               label: passwordValues["size"].round().toString(),
               onChanged: (double value) {
                 passwordValues["size"] = value.round();
+                passwordValidator();
                 setState(() {});
               },
             ),
@@ -98,6 +100,7 @@ class _FormFieldsWidgetState extends State<FormFieldsWidget> {
     return Column(
       children: [
         TextField(
+            controller: TextEditingController(text: passwordValues["password"]),
             onChanged: (value) {
               passwordValues["password"] = value;
               setState(() {});
@@ -120,14 +123,27 @@ class _FormFieldsWidgetState extends State<FormFieldsWidget> {
         map["option_minus"] = true;
         map["option_number"] = false;
         map["option_simbol"] = false;
-        password = crea
+        passwordValidator();
+      }
+
       if (newValue == "all") {
         map["option_mayus"] = true;
         map["option_minus"] = true;
         map["option_number"] = true;
         map["option_simbol"] = true;
+        passwordValidator();
       }
     });
+  }
+
+  void passwordValidator() {
+    int size = passwordValues["size"];
+    passwordValues['password'] = createpassword(Password(
+        size: size,
+        option_mayus: passwordValues["option_mayus"],
+        option_minus: passwordValues["option_minus"],
+        option_number: passwordValues["option_number"],
+        option_simbol: passwordValues["option_simbol"]));
   }
 
   addOptionsCheckBox(String textone, Map<String, dynamic> map, String keyone,
@@ -149,6 +165,18 @@ class _FormFieldsWidgetState extends State<FormFieldsWidget> {
         ),
       ],
     );
+    
+  }
+    addCheckBox(Map<String, dynamic> map, String key) {
+    return Checkbox(
+      key: Key(key),
+      value: map[key],
+      onChanged: (newValue) {
+        map[key] = newValue;
+        passwordValidator();
+        setState(() {});
+      },
+    );
   }
 
   addRadioListTile(
@@ -164,16 +192,7 @@ class _FormFieldsWidgetState extends State<FormFieldsWidget> {
     );
   }
 
-  addCheckBox(Map<String, dynamic> map, String key) {
-    return Checkbox(
-      key: Key(key),
-      value: map[key],
-      onChanged: (newValue) {
-        map[key] = newValue;
-        setState(() {});
-      },
-    );
-  }
+
 
   _maxnumberValidator(Map<String, dynamic> map, String key) {
     return map[key].toDouble();

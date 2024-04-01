@@ -1,4 +1,4 @@
-import 'package:create_password_app/views/widgets/layoutBuilderWidget.dart';
+import 'package:create_password_app/views/widgets/builders/layoutBuilderWidget.dart';
 import 'package:flutter/material.dart';
 
 import 'views/widgets/appBarWidget.dart';
@@ -17,13 +17,10 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
-          child: appBarWidget(),
-        ),
+        appBar: appBarWidget("Password Generator"),
         body:LayoutBuilderWidget(),
       ),
     );
