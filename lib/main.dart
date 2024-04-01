@@ -1,4 +1,4 @@
-import 'package:create_password_app/views/widgets/builders/layoutBuilderWidget.dart';
+import 'package:create_password_app/views/widgets/layoutBuilderWidget.dart';
 import 'package:flutter/material.dart';
 
 import 'views/widgets/appBarWidget.dart';

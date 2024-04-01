@@ -2,7 +2,7 @@ import 'package:create_password_app/model/password.dart';
 import 'package:flutter/material.dart';
 
 class FormFieldsWidget extends StatefulWidget {
-  FormFieldsWidget({
+  const FormFieldsWidget({
     super.key,
   });
 
